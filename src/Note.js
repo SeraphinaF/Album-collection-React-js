@@ -3,6 +3,24 @@ import React from "react";
 export function Note(props) {
     console.log(props);
 
+    const updateNote = () => {
+        const { title, body, author } = props.note;
+        fetch(`https://docent.cmi.hro.nl/bootb/demo/notes/${props.note.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              title,
+              body,
+              author,
+            }),
+        })
+        .then((response) => {
+            if(response.ok) {
+                props.notesRefreshHandler();
+            }
+        })
+    }
+
     const deleteNote = () => {
         fetch(`https://docent.cmi.hro.nl/bootb/demo/notes/${props.note.id}`, {
 
@@ -14,7 +32,7 @@ export function Note(props) {
             .then((response) => props.notesRefreshHandler())
     }
 
-    const createNote = () => {
+    const detailsNote = () => {
           
     }
 
@@ -23,7 +41,7 @@ export function Note(props) {
         <div>
             <h2>{props.note.title}</h2>
             <button className="btn btn-danger" onClick={deleteNote}> Verwijderen</button>
-            <button className="btn btn-primary" onClick={deleteNote}> Details</button>
+            <button className="btn btn-primary" onClick={detailsNote}> Details</button>
         </div>
     </section>
 }
