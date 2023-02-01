@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Note } from "./Note";
+// import {Notes} from "./Notes";
 import { NewNote } from "./NewNote";
-import { BrowserRouter } from "react-router-dom";
-import { Routes } from "react-router-dom";
-import { Route } from "react-router-dom";
-import { Layout } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {Layout} from "./Layout";
+// // import { Routes } from "react-router-dom";
+// // import { Layout } from "react";
 
 
 const URI_COLLECTION = "https://docent.cmi.hro.nl/bootb/demo/notes";
@@ -22,6 +23,7 @@ export function App() {
     })
       .then((response) => response.json())
       .then((result) => setNotes(result.items))
+      .catch(error => console.log("ERROR:" + error))
   }
 
   const showNotes = notes.map((value, key) =>
@@ -29,25 +31,15 @@ export function App() {
 
   useEffect(loadNotes, [])
 
-//   return <div>
-//     <Note notes={} notesRefreshHandler={()=> loadNotes()} />
-//   </div>
-// }
-
-  // return <BrowserRouter>
-  //         <Routes>
-  //             <Route path="/" element={<Layout />}>
-  //                 <Route index element={<Note key={value.id} note={value} notesRefreshHandler={loadNotes} /> }/>
-  //             </Route>
-  //             {showNotes}
-  //           <NewNote notesRefreshHandler={loadNotes} />
-  //         </Routes>
-  // </BrowserRouter>
-
- 
-
-  return <div>
-    {/* <NewNote notesRefreshHandler={loadNotes} /> */}
-    {showNotes}
-  </div>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route  path="/" index element= {<div>{showNotes}</div>}/>
+          <Route  path="create" element={<NewNote notesRefreshHandler={loadNotes}/>} />
+          <Route path=""
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
