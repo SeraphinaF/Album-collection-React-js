@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Note } from "./Note";
-// import {Notes} from "./Notes";
 import { NewNote } from "./NewNote";
+import {NoteDetails} from "./NoteDetails";
+import { NoteUpdate } from "./NoteUpdate";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {Layout} from "./Layout";
 // // import { Routes } from "react-router-dom";
@@ -37,7 +38,8 @@ export function App() {
         <Route path="/" element={<Layout/>}>
           <Route  path="/" index element= {<div>{showNotes}</div>}/>
           <Route  path="create" element={<NewNote notesRefreshHandler={loadNotes}/>} />
-          <Route path=""
+          <Route path="notes/:id" element={<NoteDetails />}/>
+          <Route path="edit/:id" element={<NoteUpdate />}/>
         </Route>
       </Routes>
     </BrowserRouter>

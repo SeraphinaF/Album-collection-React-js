@@ -36,7 +36,7 @@ export function NewNote(props) {
     return <section>
         <div>
             <h2>Nieuwe Notitie</h2>
-            <form>
+            <form className="form-control">
                     <input type="text" value={note.title} name="title" onChange={onChangeHandler} /><br />
                     <input type="text" value={note.body} name="body" onChange={onChangeHandler} /><br />
                     <input type="text" value={note.author} name="author" onChange={onChangeHandler} /><br />
